@@ -94,11 +94,11 @@
 
 # Opções de carregamento
 
-	**Carregamento adiantado** : Significa que os dados relacionandos são carregados do banco de dados em uma 
-	única consulta.
+**Carregamento adiantado**: Significa que os dados relacionandos são carregados do banco de dados em uma 
+única consulta.
 
-	**Carregamento explícito**: Significa que os dados relacionados são explicitamente carregados do banco de dados
-	em um momento posterior.
+**Carregamento explícito**: Significa que os dados relacionados são explicitamente carregados do banco de dados
+em um momento posterior.
 
-	**Carregamento lento**: Siginifica que os dados relacionados são carregados sob demanda do banco de dados
-	quando a propriedade de navegação é acessada.
+**Carregamento lento**: Siginifica que os dados relacionados são carregados sob demanda do banco de dados
+quando a propriedade de navegação é acessada.
