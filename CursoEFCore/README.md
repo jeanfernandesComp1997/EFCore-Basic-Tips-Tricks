@@ -2,29 +2,29 @@
 
 # Code First
 	
-	É a abordagem mais popular e natural para quem irá utilizar o Entity Framework Core.
+	Ã‰ a abordagem mais popular e natural para quem irÃ¡ utilizar o Entity Framework Core.
 
-	Basicamente o que você faz é o seguinte, em vez de criar todo banco de dados primeiro, você como
-	programador se concentra no domínio, e começa criando suas classes que posteriormente irão se 
-	materializar através de métodos de extensão, o qual são conhecidos como Fluent API que é uma das
-	formas de fazer todo mapeamento de entidade utilizando métodos, ou Data Annotations, que são 
+	Basicamente o que vocÃª faz Ã© o seguinte, em vez de criar todo banco de dados primeiro, vocÃª como
+	programador se concentra no domÃ­nio, e comeÃ§a criando suas classes que posteriormente irÃ£o se 
+	materializar atravÃ©s de mÃ©todos de extensÃ£o, o qual sÃ£o conhecidos como Fluent API que Ã© uma das
+	formas de fazer todo mapeamento de entidade utilizando mÃ©todos, ou Data Annotations, que sÃ£o 
 	atriburos adicionados a uma classe ou a uma propriedade.
 
 # Database First
 
-	Primeiramente é criado o banco de dados, tabelas, campos e índices.
+	Primeiramente Ã© criado o banco de dados, tabelas, campos e Ã­ndices.
 
-	1º Escrever todas as classes que representa suas entidades e relacionamentos manualmente.
-	2º É uma forma mais simples que é fazer engenharia reversa do banco de dados sem a necessidade
-	de escrever todo o código do zero, este processo chama-se Scaffold.
+	1Âº Escrever todas as classes que representa suas entidades e relacionamentos manualmente.
+	2Âº Ã‰ uma forma mais simples que Ã© fazer engenharia reversa do banco de dados sem a necessidade
+	de escrever todo o cÃ³digo do zero, este processo chama-se Scaffold.
 
 # DbContext
 
-	Combinação dos padrões de projetos UoW e Repository, que contém um conjunto de métodos responsáveis
-	por gravar e ler informações do banco de dados.
+	CombinaÃ§Ã£o dos padrÃµes de projetos UoW e Repository, que contÃ©m um conjunto de mÃ©todos responsÃ¡veis
+	por gravar e ler informaÃ§Ãµes do banco de dados.
 
-	O DbContext é a classe principal e mais importante que você terá acesso, o objetivo dela é simplificar
-	a interação de sua aplicação com seu banco de dados.
+	O DbContext Ã© a classe principal e mais importante que vocÃª terÃ¡ acesso, o objetivo dela Ã© simplificar
+	a interaÃ§Ã£o de sua aplicaÃ§Ã£o com seu banco de dados.
 
 	Reponsabilidades:
 		- Configurar modelo de dados;
@@ -32,26 +32,26 @@
 		- Consultar e persistir dados em seu banco;
 		- Fazer toda rastreabilidade de objetos;
 		- Materializar resultados de consulta;
-		- Cache de primeiro nível.
+		- Cache de primeiro nÃ­vel.
 
 	OnConfiguring:
-		É usado para informar qual provider será utilizado e informar a string de comexão, logger,
-		serviços customizados e outros.
+		Ã‰ usado para informar qual provider serÃ¡ utilizado e informar a string de comexÃ£o, logger,
+		serviÃ§os customizados e outros.
 
 	OnModelCreating:
-		É usado para configurar todo o modelo de dados que serão posteriormente transformados em
+		Ã‰ usado para configurar todo o modelo de dados que serÃ£o posteriormente transformados em
 		tabelas e comandos SQL's.
 
 	SaveChanges:
-		Método responsável por coletar os dados que sofreram alterações e persitir no banco de dados.
+		MÃ©todo responsÃ¡vel por coletar os dados que sofreram alteraÃ§Ãµes e persitir no banco de dados.
 
-# Migrações
+# MigraÃ§Ãµes
 	
-	A migração é um dos recursos mais importantes do entity Framework Core no qual você versiona seu modelo
-	de dados, neste processo é gerado um arquivo contendo as últimas alterações que você fez em seu modelo
+	A migraÃ§Ã£o Ã© um dos recursos mais importantes do entity Framework Core no qual vocÃª versiona seu modelo
+	de dados, neste processo Ã© gerado um arquivo contendo as Ãºltimas alteraÃ§Ãµes que vocÃª fez em seu modelo
 	de dados.
 
-	O que é necessário para criar uma migração?
+	O que Ã© necessÃ¡rio para criar uma migraÃ§Ã£o?
 		- EntityFrameworkCore.Design;
 		- EntityFrameworkCore.Tools;
 
@@ -65,40 +65,40 @@
 		
 		get-help entityframework
 
-		Adicionando uma migração
+		Adicionando uma migraÃ§Ã£o
 			Add-Migration
 
 		Remove-Migration
 		Script-Migration
 		Update-Database
 
-# Criando a primeira migração:
+# Criando a primeira migraÃ§Ã£o:
 
 	dotnet ef migrations add PrimeiraMigracao -p .\Curso\CursoEFCore.csproj
 
-# Gerando um Script de Migração SQL
+# Gerando um Script de MigraÃ§Ã£o SQL
 
 	dotnet ef migrations script -p .\Curso\CursoEFCore\CursoEFCore.csproj -o .\Curso\PrimeiraMigracao.SQL
 
-# Aplicando a migração
+# Aplicando a migraÃ§Ã£o
 
 	dotnet ef database update -p .\Curso\CursoEFCore\CursoEFCore.csproj -v
 
 # Gerando scripts sql idempotentes
 	dotnet ef migrations script -p .\Curso\CursoEFCore\CursoEFCore.csproj -o .\Curso\Idempotente.SQL -i
 
-# Rollback de migrações
+# Rollback de migraÃ§Ãµes
 	dotnet ef database update Primeiramigracao -p .\Curso\CursoEFCore\CursoEFCore.csproj -v
 	dotnet ef migrations remove -p .\Curso\CursoEFCore\CursoEFCore.csproj -v
 
 
-# Opções de carregamento
+# OpÃ§Ãµes de carregamento
 
-	**Carregamento adiantado**: Significa que os dados relacionandos são carregados do banco de dados em uma 
-	única consulta.
+	**Carregamento adiantado** : Significa que os dados relacionandos sÃ£o carregados do banco de dados em uma 
+	Ãºnica consulta.
 
-	**Carregamento explícito**: Significa que os dados relacionados são explicitamente carregados do banco de dados
+	**Carregamento explÃ­cito**: Significa que os dados relacionados sÃ£o explicitamente carregados do banco de dados
 	em um momento posterior.
 
-	**Carregamento lento**: Siginifica que os dados relacionados são carregados sob demanda do banco de dados
-	quando a propriedade de navegação é acessada.
+	**Carregamento lento**: Siginifica que os dados relacionados sÃ£o carregados sob demanda do banco de dados
+	quando a propriedade de navegaÃ§Ã£o Ã© acessada.
