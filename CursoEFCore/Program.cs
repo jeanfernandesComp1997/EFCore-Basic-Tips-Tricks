@@ -16,7 +16,11 @@ namespace CursoEFCore
             //InsertBatch();
             //QueryData();
             //InsertOrder();
-            QueryWithEarlyLoading();
+            //QueryWithEarlyLoading();
+            //UpdateData();
+            //DisconectedUpdateData();
+            //DeleteData();
+            DisconectedDelete();
         }
 
         private static void InsertData()
@@ -161,6 +165,70 @@ namespace CursoEFCore
                 .ToList();
 
             Console.WriteLine(orders.Count);
+        }
+
+        private static void UpdateData()
+        {
+            using var db = new ApplicationContext();
+
+            var client = db.Clients.Find(1);
+            client.Name = "Client changed step 2";
+            //db.Clients.Update(client); -> com esta instrução todas as colunas são alteradas, isso não é bom
+
+            //Usando apenas o save changes, apenas as propriedades alteradas são modificadas no banco de dados
+            db.SaveChanges();
+        }
+
+        private static void DisconectedUpdateData()
+        {
+            using var db = new ApplicationContext();
+
+            //var client = db.Clients.Find(1);
+
+            var client = new Client()
+            {
+                Id = 1
+            };
+
+            var clientDisconected = new
+            {
+                Name = "Disconeted client step 3",
+                Phone = "11999999999"
+            };
+
+            db.Attach(client);
+            db.Entry(client).CurrentValues.SetValues(clientDisconected);
+
+            db.SaveChanges();
+        }
+
+        private static void DeleteData()
+        {
+            using var db = new ApplicationContext();
+
+            var client = db.Clients.Find(3);
+
+            //db.Clients.Remove(client);
+            //db.Remove(client);
+            db.Entry(client).State = EntityState.Deleted;
+
+            db.SaveChanges();
+        }
+
+        private static void DisconectedDelete()
+        {
+            using var db = new ApplicationContext();
+
+            var client = new Client()
+            {
+                Id = 2
+            };
+
+            //db.Clients.Remove(client);
+            //db.Remove(client);
+            db.Entry(client).State = EntityState.Deleted;
+
+            db.SaveChanges();
         }
     }
 }

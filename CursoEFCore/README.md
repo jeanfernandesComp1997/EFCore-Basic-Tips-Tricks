@@ -102,3 +102,7 @@ em um momento posterior.
 
 **Carregamento lento**: Siginifica que os dados relacionados são carregados sob demanda do banco de dados
 quando a propriedade de navegação é acessada.
+
+
+# Alterando nome da tabela de migrações
+	Adicionar método MigrationsHistoryTable no método OnConfiguring no método UseSql
